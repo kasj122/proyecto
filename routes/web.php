@@ -24,9 +24,7 @@ Route::get('/informacion', function (){
     return view('paginas/informacion');
 });
 
-Route::get('/', function (){
-    return 'Esta es la url raiz';
-});
+
 
 Route::get('products', function (){
     return view('products.index');
