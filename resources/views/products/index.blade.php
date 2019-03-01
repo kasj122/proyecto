@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,9 +17,33 @@
                     <div class="card-header">
                         Listado de Productos
                         <a href="{{route('products.create')}}" class="btn btn-success btn-sm float-right">Nuevo Producto</a>
+                        <button type="button" class="btn btn-primary btn-sm" style="float: right; margin-right: 10px;">Buscar</button>
                     </div>
                     <div class="card-body">
-                        ...
+                        @if(session('info'))
+                            <div class="alert alert-success">
+                                {{session('info')}}
+                            </div>
+                        @endif
+                        <table class="table table-hover table-sm">
+                            <thead>
+                                <th>Descripcion</th>
+                                <th>Precio</th>
+                            </thead>
+                            <tbody>
+                            @foreach($products as $product)
+                            <tr>
+                                <td>
+                                {{$product->description}}
+                                </td>
+                                <td>
+                                    {{$product->price}}
+                                    <button type="button" class="btn btn-danger" style="float: right;">Eliminar</button>
+                                </td>
+                            </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
