@@ -26,4 +26,28 @@ class ProductosController extends Controller
     public function edit() {
         return Product::where('id', request()->id)->select('id as idProducto', 'price', 'description as descripcion')->first();
     }
+
+    public function store(Request $request){
+        $newProduct = new Product;
+        $newProduct->description = $request->input('description');
+        $newProduct->price= $request->input('price');
+        $newProduct->save();
+        return redirect()->route('products.index')->with('info', 'Producto creado exitosamente');
+    }
+
+    public function create(){
+        return view('products.create');
+    }
+
+    public function index(){
+        $products = Product::all();
+        return view('products.index', ['products'=> $products]);
+    }
+
+    public function informacion(){
+        return view('paginas/informacion');
+    }
+
+
 }
+

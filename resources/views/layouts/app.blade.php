@@ -108,7 +108,7 @@
                                     <a class="nav-link" href="{{ route('products.index') }}" style="color: white; font-size: 20px;">Productos</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" role="button" style="color: white; font-size: 20px;">Another Section</a>
+                                    <a class="nav-link" href="{{route('paginas/informacion')}}" role="button" style="color: white; font-size: 20px;">Muebles</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="#" role="button" style="color: white; font-size: 20px;">Another Section</a>

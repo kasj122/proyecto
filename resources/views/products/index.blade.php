@@ -35,7 +35,7 @@
                                         {{$product->description}}
                                         </td>
                                         <td>
-                                            {{$product->price}}
+                                           $ {{$product->price}}
                                             @if(Auth::user()->name != 'root')
                                                 <button type="button" class="btn btn-success btn-sm float-right" data-toggle="modal" data-target="#comprar">
                                                     Agregar
