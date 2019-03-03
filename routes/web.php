@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\http\request;
+use App\Product;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,11 +29,30 @@ Route::get('/informacion', function (){
 
 
 Route::get('products', function (){
-    return view('products.index');
+    $products = Product::all();
+    return view('products.index', ['products'=> $products]);
 })->name('products.index');
 
 Route::get('products/create', function (){
     return view('products.create');
 })->name('products.create');
+
+
+Route::post('poducts', function (Request $request){
+    $newProduct = new Product;
+    $newProduct->description = $request->input('description');
+    $newProduct->price= $request->input('price');
+    $newProduct->save();
+    return redirect()->route('products.index')->with('info', 'Producto creado exitosamente');
+})->name('poducts.store');
+
+Route::get('products/{id}/destroy', 'ProductosController@destroy')->name('products.destroy');
+Route::put('products/upgrade', 'ProductosController@upgrade')->name('products.upgrade');
+Route::get('products/edit', 'ProductosController@edit')->name('product.edit');
+
+
+
+
+
 
 

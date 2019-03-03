@@ -1,46 +1,54 @@
-<!doctype html>
+@extends('layouts.app')
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-<body>
+@section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         Listado de Productos
-                        <a href="{{route('products.create')}}" class="btn btn-success btn-sm float-right">Nuevo Producto</a>
-                        <button type="button" class="btn btn-primary btn-sm" style="float: right; margin-right: 10px;">Buscar</button>
+                        @if(Auth::user()->name == 'root')
+                            <button type="button" class="btn btn-success btn-sm float-right" data-toggle="modal" data-target="#crear">
+                                Nuevo Producto
+                            </button>
+                        @endif
                     </div>
                     <div class="card-body">
-                        @if(session('info'))
-                            <div class="alert alert-success">
-                                {{session('info')}}
-                            </div>
-                        @endif
-                        <table class="table table-hover table-sm">
+                        {{--@if(session('info'))--}}
+                            {{--<div class="alert alert-success">--}}
+                                {{--{{session('info')}}--}}
+                            {{--</div>--}}
+                        {{--@endif--}}
+                            <br>
+                        <input id="filtrar" type="text" class="form-control{{ $errors->has('buscar') ? ' is-invalid' : '' }}" name="filtrar" value="{{ old('buscar') }}" autofocus placeholder="Buscar">
+                            <br>
+
+                        <table class="table table-hover table-sm" style="margin-top: 3px;">
                             <thead>
-                                <th>Descripcion</th>
-                                <th>Precio</th>
+                                <th style="width: 800px;">Descripcion</th>
+                                <th style="width: 100px;">Precio</th>
                             </thead>
-                            <tbody>
-                            @foreach($products as $product)
-                            <tr>
-                                <td>
-                                {{$product->description}}
-                                </td>
-                                <td>
-                                    {{$product->price}}
-                                    <button type="button" class="btn btn-danger" style="float: right;">Eliminar</button>
-                                </td>
-                            </tr>
+                            <tbody class="buscar">
+                                @foreach($products as $product)
+                                    <tr>
+                                        <td>
+                                        {{$product->description}}
+                                        </td>
+                                        <td>
+                                            {{$product->price}}
+                                            @if(Auth::user()->name != 'root')
+                                                <button type="button" class="btn btn-success btn-sm float-right" data-toggle="modal" data-target="#comprar">
+                                                    Agregar
+                                                </button>
+                                            @endif
+                                        </td>
+                                        @if(Auth::user()->name == 'root')
+                                            <td>
+                                                <a href="{{ route('products.destroy', $product->id) }}" class="btn btn-danger" style="float: right; margin-left: 5px;">Eliminar</a>
+                                                <a id="editar" class="btn btn-primary" style="float: right; color: white" onclick="editar({{ $product->id }})">Editar</a>
+                                            </td>
+                                        @endif
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -49,5 +57,34 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+    <script>
+        $(document).ready(function () {
+            (function ($) {
+                $('#filtrar').keyup(function () {
+                    var rex = new RegExp($(this).val(), 'i');
+                    $('.buscar tr').hide();
+                    $('.buscar tr').filter(function () {
+                        return rex.test($(this).text());
+                    }).show();
+                })
+            }(jQuery));
+        });
+
+        function editar(id) {
+            $.ajax({
+                url: '{{ route('product.edit') }}',
+                method:'GET',
+                data: {'id': id},
+                dataType: "json",
+                success:function(data){
+                    $('#modalEditar').modal('show');
+                    $('#descripcion').val(data.descripcion);
+                    $('#price').val(data.price);
+                    $('#id').val(data.idProducto);
+                }
+            });
+        }
+    </script>
+    @include('products.create')
+    @include('products.edit')
+@endsection
