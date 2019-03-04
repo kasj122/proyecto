@@ -13,7 +13,7 @@ class TipoMueble extends Migration
      */
     public function up()
     {
-        Schema::table('tipomueble', function (Blueprint $table) {
+        Schema::create('tipomueble', function (Blueprint $table) {
             $table->increments('id');
             $table->string('Nombre', 100);
         });

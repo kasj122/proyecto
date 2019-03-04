@@ -13,7 +13,7 @@ class Producto extends Migration
      */
     public function up()
     {
-        Schema::table('producto', function (Blueprint $table) {
+        Schema::create('producto', function (Blueprint $table) {
             $table->increments('id');
             $table->string('Nombre', 100);
             $table->text('Descripcion');
@@ -22,7 +22,7 @@ class Producto extends Migration
             $table->string('Imagen', 100);
             $table->unsignedInteger('TipoMueble');
 
-            $table->foreign('TipoMueble')->references('Nombre')->on('tipomueble')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('TipoMueble')->references('id')->on('tipomueble')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
