@@ -15,6 +15,7 @@ class Producto extends Migration
     {
         Schema::table('producto', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('Nombre', 100);
             $table->text('Descripcion');
             $table->double('Precio', 8, 2);
             $table->unsignedInteger('Stock');
@@ -32,6 +33,6 @@ class Producto extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('producto');
     }
 }

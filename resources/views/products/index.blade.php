@@ -25,7 +25,7 @@
 
                         <table class="table table-hover table-sm" style="margin-top: 3px;">
                             <thead>
-                                <th style="width: 800px;">Descripcion</th>
+                                <th style="width: 900px;">Descripcion</th>
                                 <th style="width: 100px;">Precio</th>
                             </thead>
                             <tbody class="buscar">
@@ -36,18 +36,15 @@
                                         </td>
                                         <td>
                                            $ {{$product->price}}
-                                            @if(Auth::user()->name != 'root')
-                                                <button type="button" class="btn btn-success btn-sm float-right" data-toggle="modal" data-target="#comprar">
-                                                    Agregar
-                                                </button>
-                                            @endif
                                         </td>
-                                        @if(Auth::user()->name == 'root')
-                                            <td>
+                                        <td>
+                                            @if(Auth::user()->name == 'root')
                                                 <a href="{{ route('products.destroy', $product->id) }}" class="btn btn-danger" style="float: right; margin-left: 5px;">Eliminar</a>
                                                 <a id="editar" class="btn btn-primary" style="float: right; color: white" onclick="editar({{ $product->id }})">Editar</a>
-                                            </td>
-                                        @endif
+                                            @else
+                                                <a href="#"><img src="{{ asset('images/Carro.png') }}" alt=""></a>
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
