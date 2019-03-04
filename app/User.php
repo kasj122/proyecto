@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'Nombre', 'email', 'password',
+        'Nombre', 'email', 'password',  'Direccion', 'Telefono',
     ];
 
     /**
@@ -27,4 +27,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function ventas() {
+        return $this->hasMany(Venta::class, 'Usuario', 'id');
+    }
 }

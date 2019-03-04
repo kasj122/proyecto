@@ -37,6 +37,6 @@ class Venta extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('venta');
     }
 }

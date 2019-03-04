@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
+use App\Producto;
 use Illuminate\Http\Request;
 
 class ProductosController extends Controller
@@ -14,7 +14,7 @@ class ProductosController extends Controller
     }
 
     public function upgrade() {
-        $producto = Product::findOrFail(request()->id);
+        $producto = Producto::findOrFail(request()->id);
         $producto->update([
             'description' => request()->descripcion,
             'price' => request()->price
@@ -28,10 +28,12 @@ class ProductosController extends Controller
     }
 
     public function store(Request $request){
-        $newProduct = new Product;
-        $newProduct->description = $request->input('description');
-        $newProduct->price= $request->input('price');
-        $newProduct->save();
+//        $newProduct = new Producto();
+//        $newProduct->description = $request->input('description');
+//        $newProduct->price= $request->input('price');
+//        $newProduct->save();
+//        Producto::create(request()->all());
+
         return redirect()->route('products.index')->with('info', 'Producto creado exitosamente');
     }
 
