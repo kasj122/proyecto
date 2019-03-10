@@ -51,13 +51,13 @@ Auth::routes();
 
 
 
-Route::post('products/store', 'ProductosController@store')->name('poducts.store');
-Route::post('products/create', 'ProductosController@create')->name('products.create');
+Route::post('products/store', 'ProductosController@store')->name('products.store');
+Route::get('products/create', 'ProductosController@create')->name('products.create');
 Route::get('products/index', 'ProductosController@index')->name('products.index');
 Route::get('paginas/informacion', 'ProductosController@informacion')->name('paginas/informacion');
 
 Route::get('products/{id}/destroy', 'ProductosController@destroy')->name('products.destroy');
-Route::put('products/upgrade', 'ProductosController@upgrade')->name('products.upgrade');
+Route::put('products/update', 'ProductosController@update')->name('products.update');
 Route::get('products/edit', 'ProductosController@edit')->name('product.edit');
 
 

@@ -26,6 +26,34 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="Direccion" class="col-md-4 col-form-label text-md-right">{{ __('Direccion') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="Direccion" type="text" class="form-control{{ $errors->has('Direccion') ? ' is-invalid' : '' }}" name="Direccion" value="{{ old('Direccion') }}" required autofocus>
+
+                                @if ($errors->has('Direccion'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('Direccion') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="Telefono" class="col-md-4 col-form-label text-md-right">{{ __('Telefono') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="Telefono" type="text" class="form-control{{ $errors->has('Telefono') ? ' is-invalid' : '' }}" name="Telefono" value="{{ old('Telefono') }}" required autofocus>
+
+                                @if ($errors->has('Telefono'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('Telefono') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">

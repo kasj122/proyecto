@@ -7,18 +7,33 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{route('products.upgrade')}}" method="post">
+
+            <form action="{{route('products.update')}}" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
-                    {!! method_field('PUT') !!}
-                    {{ csrf_field() }}
-                    <input type="hidden" id="id" name="id" value="0">
+                    @csrf
                     <div class="form-group">
-                        <label for="description">Descripcion</label>
-                        <input type="text" class="form-control" id="descripcion" name="descripcion">
+                        <label for="">Nombre</label>
+                        <input type="text" class="form-control" name="Nombre" required>
                     </div>
                     <div class="form-group">
-                        <label for="price">Precio</label>
-                        <input type="number" class="form-control" id="price" name="price">
+                        <label for="">Descripcion</label>
+                        <input type="text" class="form-control" name="Descripcion" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Precio</label>
+                        <input type="number" class="form-control" name="Precio" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Stock</label>
+                        <input type="number" class="form-control" name="Stock" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Tipo Mueble</label>
+                        <input type="text" class="form-control" name="TipoMueble" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="Imagen">Imagen</label>
+                        <input type="file" class="form-control{{ $errors->has('Imagen') ? ' is-invalid' : '' }}" id="Imagen" name="Imagen" accept=".png, .jpg, .jpeg" style="border: none" required/>
                     </div>
                 </div>
                 <div class="modal-footer">

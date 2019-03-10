@@ -133,7 +133,7 @@
                 toastr.success("{{ session('success') }}");
             @endif
             @if(session('info'))
-                toastr.success("{{ session('info') }}");
+                toastr.info("{{ session('info') }}");
             @endif
         });
     </script>
